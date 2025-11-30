@@ -11,10 +11,10 @@ const config: Config = {
   url: 'https://ayesha-aziz123.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/humanoid-robotics-textbook/',
+  baseUrl: '/Humanoid-Robotics-textbook/',
  trailingSlash: false,
 
-  projectName: 'humanoid-robotics-textbook', // Repository ka naam
+  projectName: 'Humanoid-Robotics-textbook', // Repository ka naam
   organizationName: 'ayesha-aziz123', // Aapka GitHub username
 
   // onBrokenLinks: 'warn',
@@ -65,7 +65,7 @@ const config: Config = {
           label: 'Book',
         },
         {
-          href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook',
+          href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',
           label: 'GitHub',
           position: 'right',
         },
@@ -80,7 +80,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Issues',
-              href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook/issues',
+              href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook/issues',
             },
           ],
         },
@@ -89,7 +89,7 @@ const config: Config = {
           items: [
             {
               label: 'Project GitHub',
-              href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook',
+              href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',
             },
           ],
         },
