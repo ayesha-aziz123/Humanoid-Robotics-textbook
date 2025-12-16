@@ -166,7 +166,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: 'docs',  
+          // routeBasePath: 'docs',  
           editUrl: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook/tree/main/',
         },
         blog: false,  // ✅ Disabled blog
