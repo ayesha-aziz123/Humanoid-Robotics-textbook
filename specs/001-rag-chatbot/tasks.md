@@ -23,13 +23,13 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create `api/` directory structure: `api/src/`, `api/tests/`
-- [ ] T002 Create `scripts/` directory
-- [ ] T003 Create `book_source/src/components/` directory
-- [ ] T004 Initialize Python project with `poetry` in `api/` (create `api/pyproject.toml`)
-- [ ] T005 Initialize Python project with `poetry` in `scripts/` (create `scripts/pyproject.toml`)
-- [ ] T006 Initialize Node.js project in `book_source/` (run `npm init` or `yarn init` in `book_source/`)
-- [ ] T007 Configure `.env` file at project root with QDRANT_URL, QDRANT_API_KEY, CLUSTER_ID, GEMINI_API_KEY
+- [X] T001 Create `api/` directory structure: `api/src/`, `api/tests/`
+- [X] T002 Create `scripts/` directory
+- [X] T003 Create `book_source/src/components/` directory
+- [X] T004 Initialize Python project with `poetry` in `api/` (create `api/pyproject.toml`)
+- [X] T005 Initialize Python project with `poetry` in `scripts/` (create `scripts/pyproject.toml`)
+- [X] T006 Initialize Node.js project in `book_source/` (run `npm init` or `yarn init` in `book_source/`)
+- [X] T007 Configure `.env` file at project root with QDRANT_URL, QDRANT_API_KEY, CLUSTER_ID, GEMINI_API_KEY
 
 ---
 
@@ -39,13 +39,13 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T008 Install Python dependencies for `api/` (FastAPI, uvicorn, qdrant-client, google-generativeai, python-dotenv) in `api/pyproject.toml`
-- [ ] T009 Install Python dependencies for `scripts/` (FastEmbed, qdrant-client, python-dotenv) in `scripts/pyproject.toml`
-- [ ] T010 Implement markdown file scanning logic in `scripts/generate_embeddings.py`
-- [ ] T011 Implement embedding generation using FastEmbed in `scripts/generate_embeddings.py`
-- [ ] T012 Implement Qdrant collection creation ("physical_ai_book" with 384 dimensions) and population logic in `scripts/generate_embeddings.py`
-- [ ] T013 Create FastAPI application instance in `api/src/main.py`
-- [ ] T014 Configure CORS for FastAPI to allow `localhost:3000` in `api/src/main.py`
+- [X] T008 Install Python dependencies for `api/` (FastAPI, uvicorn, qdrant-client, google-generativeai, python-dotenv) in `api/pyproject.toml`
+- [X] T009 Install Python dependencies for `scripts/` (FastEmbed, qdrant-client, python-dotenv) in `scripts/pyproject.toml`
+- [X] T010 Implement markdown file scanning logic in `scripts/generate_embeddings.py`
+- [X] T011 Implement embedding generation using FastEmbed in `scripts/generate_embeddings.py`
+- [X] T012 Implement Qdrant collection creation ("physical_ai_book" with 384 dimensions) and population logic in `scripts/generate_embeddings.py`
+- [X] T013 Create FastAPI application instance in `api/src/main.py`
+- [X] T014 Configure CORS for FastAPI to allow `localhost:3000` in `api/src/main.py`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -59,13 +59,13 @@
 
 ### Implementation for User Story 1
 
-- [ ] T015 [P] [US1] Implement POST `/query` endpoint in `api/src/main.py` to accept text queries
-- [ ] T016 [US1] Implement RAG logic for standard queries within the `/query` endpoint in `api/src/main.py`, including embedding user query, searching Qdrant, and generating response via Gemini API
-- [ ] T017 [US1] Include source citations in the `/query` endpoint response in `api/src/main.py`
-- [ ] T018 [P] [US1] Create React chatbot component in `book_source/src/components/Chatbot.js`
-- [ ] T019 [US1] Integrate `Chatbot.js` component into Docusaurus (e.g., in `book_source/src/theme/Root.js` or a custom page)
-- [ ] T020 [US1] Implement sending standard text queries from `Chatbot.js` to the `/query` endpoint
-- [ ] T021 [US1] Display chatbot responses, including source citations, in the `Chatbot.js` UI
+- [X] T015 [P] [US1] Implement POST `/query` endpoint in `api/src/main.py` to accept text queries
+- [X] T016 [US1] Implement RAG logic for standard queries within the `/query` endpoint in `api/src/main.py`, including embedding user query, searching Qdrant, and generating response via Gemini API
+- [X] T017 [US1] Include source citations in the `/query` endpoint response in `api/src/main.py`
+- [X] T018 [P] [US1] Create React chatbot component in `book_source/src/components/Chatbot.js`
+- [X] T019 [US1] Integrate `Chatbot.js` component into Docusaurus (e.g., in `book_source/src/theme/Root.js` or a custom page)
+- [X] T020 [US1] Implement sending standard text queries from `Chatbot.js` to the `/query` endpoint
+- [X] T021 [US1] Display chatbot responses, including source citations, in the `Chatbot.js` UI
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -79,11 +79,11 @@
 
 ### Implementation for User Story 2
 
-- [ ] T022 [P] [US2] Implement POST `/query-selection` endpoint in `api/src/main.py` to accept selected text and an optional question
-- [ ] T023 [US2] Implement RAG logic for selected text queries within the `/query-selection` endpoint in `api/src/main.py`, ensuring context is restricted to the selected text as per constitution
-- [ ] T024 [US2] Modify `Chatbot.js` to detect selected text in Docusaurus and enable a "Query Selected Text" option
-- [ ] T025 [US2] Implement sending selected text queries from `Chatbot.js` to the `/query-selection` endpoint
-- [ ] T026 [US2] Display contextual chatbot responses in the `Chatbot.js` UI
+- [X] T022 [P] [US2] Implement POST `/query-selection` endpoint in `api/src/main.py` to accept selected text and an optional question
+- [X] T023 [US2] Implement RAG logic for selected text queries within the `/query-selection` endpoint in `api/src/main.py`, ensuring context is restricted to the selected text as per constitution
+- [X] T024 [US2] Modify `Chatbot.js` to detect selected text in Docusaurus and enable a "Query Selected Text" option
+- [X] T025 [US2] Implement sending selected text queries from `Chatbot.js` to the `/query-selection` endpoint
+- [X] T026 [US2] Display contextual chatbot responses in the `Chatbot.js` UI
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -97,8 +97,8 @@
 
 ### Implementation for Initializing RAG System
 
-- [ ] T027 [US3] Refine `scripts/generate_embeddings.py` for robust error handling and logging during scanning, embedding, and Qdrant upload
-- [ ] T028 [US3] Document the execution process for `scripts/generate_embeddings.py` in `quickstart.md` (if not already sufficiently covered)
+- [X] T027 [US3] Refine `scripts/generate_embeddings.py` for robust error handling and logging during scanning, embedding, and Qdrant upload
+- [X] T028 [US3] Document the execution process for `scripts/generate_embeddings.py` in `quickstart.md` (if not already sufficiently covered)
 
 **Checkpoint**: All core user stories and initial setup should now be independently functional
 
@@ -108,11 +108,11 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T029 Implement comprehensive error handling for all API endpoints in `api/src/main.py`
-- [ ] T030 Implement robust logging for backend operations (FastAPI, embedding generation) in `api/src/main.py` and `scripts/generate_embeddings.py`
-- [ ] T031 Implement graceful rate limit handling for Google Gemini API calls in `api/src/main.py`
-- [ ] T032 Review and ensure all secrets (API keys) are loaded securely from environment variables, especially for deployment scenarios (refer to `quickstart.md` for guidance)
-- [ ] T033 Run `quickstart.md` validation by following all steps to ensure a smooth setup and operation
+- [X] T029 Implement comprehensive error handling for all API endpoints in `api/src/main.py`
+- [X] T030 Implement robust logging for backend operations (FastAPI, embedding generation) in `api/src/main.py` and `scripts/generate_embeddings.py`
+- [X] T031 Implement graceful rate limit handling for Google Gemini API calls in `api/src/main.py`
+- [X] T032 Review and ensure all secrets (API keys) are loaded securely from environment variables, especially for deployment scenarios (refer to `quickstart.md` for guidance)
+- [X] T033 Run `quickstart.md` validation by following all steps to ensure a smooth setup and operation
 
 ---
 

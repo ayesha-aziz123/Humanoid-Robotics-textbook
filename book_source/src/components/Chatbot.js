@@ -1,158 +1,3 @@
-// import React, { useState, useEffect, useRef } from 'react';
-// import './Chatbot.css'; // Import the CSS file
-
-// const Chatbot = () => {
-//   const [messages, setMessages] = useState([]);
-//   const [inputValue, setInputValue] = useState('');
-//   const [loading, setLoading] = useState(false);
-//   const [selectedText, setSelectedText] = useState('');
-//   const messagesEndRef = useRef(null);
-
-//   // Scroll to the bottom of the messages container whenever messages update
-//   const scrollToBottom = () => {
-//     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-//   };
-
-//   useEffect(() => {
-//     scrollToBottom();
-//   }, [messages, loading]);
-
-//   // Effect to detect text selection
-//   useEffect(() => {
-//     const handleSelection = () => {
-//       const selection = window.getSelection().toString().trim();
-//       setSelectedText(selection);
-//     };
-//     document.addEventListener('mouseup', handleSelection);
-//     return () => document.removeEventListener('mouseup', handleSelection);
-//   }, []);
-
-//   // Function to handle sending a message (both regular and selection-based)
-//   const handleSendMessage = async (query, context = null) => {
-//     if (!query && !context) return;
-
-//     const userMessage = { sender: 'user', text: context ? `Query about: "${context}"
-// ${query}` : query };
-//     setMessages(prev => [...prev, userMessage]);
-//     setInputValue('');
-//     setLoading(true);
-
-//     const isSelectionQuery = !!context;
-//     const endpoint = isSelectionQuery ? 'http://127.0.0.1:8000/query-selection' : 'http://127.0.0.1:8000/query';
-//     const body = isSelectionQuery ? { selected_text: context, query: query || null } : { query };
-
-//     try {
-//       const res = await fetch(endpoint, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(body),
-//       });
-
-//       if (!res.ok) {
-//         const errorData = await res.json();
-//         throw new Error(errorData.detail || 'Failed to fetch response');
-//       }
-
-//       const data = await res.json();
-//       const botMessage = { sender: 'bot', answer: data.answer, sources: data.sources };
-//       setMessages(prev => [...prev, botMessage]);
-
-//     } catch (err) {
-//       const errorMessage = { sender: 'bot', answer: `Error: ${err.message}`, sources: [] };
-//       setMessages(prev => [...prev, errorMessage]);
-//     } finally {
-//       setLoading(false);
-//       setSelectedText(''); // Clear selection after use
-//     }
-//   };
-
-//   return (
-//     <div className="chatbot-container">
-//       <div className="chatbot-header">Physical AI Chatbot</div>
-//       <div className="chatbot-messages">
-//         {messages.map((msg, index) => (
-//           <div key={index} className={`message ${msg.sender}-message`}>
-//             {msg.sender === 'user' ? (
-//               <div>{msg.text}</div>
-//             ) : (
-//               <div>
-//                 <div>{msg.answer}</div>
-//                 {msg.sources && msg.sources.length > 0 && (
-//                   <div className="sources">
-//                     <h5>Sources:</h5>
-//                     <ul className="source-list">
-//                       {msg.sources.map((source, i) => (
-//                         <li key={i} className="source-item" title={source.file}>
-//                            - {source.file.split(/[\\/]/).pop()} (Score: {source.score.toFixed(2)})
-//                         </li>
-//                       ))}
-//                     </ul>
-//                   </div>
-//                 )}
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//         {loading && <div className="message bot-message loading-indicator">Thinking...</div>}
-//         <div ref={messagesEndRef} />
-//       </div>
-
-//       {selectedText && (
-//         <div className="selected-text-bar">
-//           <span>Selected: "{selectedText.substring(0, 50)}..."</span>
-//           <button onClick={() => { handleSendMessage(inputValue, selectedText) }}>
-//             Ask about this
-//           </button>
-//         </div>
-//       )}
-
-//       <form className="chatbot-input-form" onSubmit={(e) => { e.preventDefault(); handleSendMessage(inputValue); }}>
-//         <input
-//           type="text"
-//           value={inputValue}
-//           onChange={(e) => setInputValue(e.target.value)}
-//           placeholder="Ask about the book..."
-//           className="chatbot-input"
-//         />
-//         <button type="submit" disabled={loading} className="chatbot-button">
-//           Send
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Chatbot;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import './Chatbot.css';
 
@@ -212,7 +57,36 @@ const Chatbot = () => {
       }
 
       const data = await res.json();
-      const botMessage = { sender: 'bot', answer: data.answer, sources: data.sources };
+
+      // Check if it's a rejection response (has 'message' field) or success response (has 'answer' field)
+      let botMessage;
+
+      if (data.message && data.validation) {
+        // Rejection response - question was IRRELEVANT
+        botMessage = {
+          sender: 'bot',
+          answer: data.message,  // Use 'message' field for rejections
+          sources: [],
+          isRejection: true
+        };
+      } else if (data.answer) {
+        // Success response - question was RELEVANT
+        botMessage = {
+          sender: 'bot',
+          answer: data.answer,
+          sources: data.source_chunks || data.sources || [],
+          isRejection: false
+        };
+      } else {
+        // Fallback for unexpected response format
+        botMessage = {
+          sender: 'bot',
+          answer: "I received an unexpected response format. Please try again.",
+          sources: [],
+          isRejection: false
+        };
+      }
+
       setMessages(prev => [...prev, botMessage]);
 
     } catch (err) {
@@ -233,7 +107,7 @@ const Chatbot = () => {
     if (isOpen && messages.length === 0) {
       setMessages([{
         sender: 'bot',
-        answer: "Hello! I'm your Physics AI Assistant. Ask me anything about physics or select text to get specific explanations.",
+        answer: "👋🏻 Hello! I'm your Physics AI Assistant. Ask me anything about physics or select text to get specific explanations.",
         sources: []
       }]);
     }
@@ -309,27 +183,44 @@ const Chatbot = () => {
                     ) : (
                       <div>
                         <div className="chatbot-message-text">{msg.answer}</div>
-                        {msg.sources && msg.sources.length > 0 && (
-                          <div className="chatbot-sources">
-                            <h4>📚 Sources:</h4>
-                            <div className="chatbot-sources-list">
-                              {msg.sources.map((source, i) => (
-                                <div 
-                                  key={i} 
-                                  className="chatbot-source-item"
-                                  title={source.file}
-                                >
-                                  <div className="chatbot-source-file">
-                                    {source.file.split(/[\\/]/).pop()}
-                                  </div>
-                                  <div className="chatbot-source-score">
-                                    Relevance: {source.score.toFixed(2)}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+
+{msg.sources && msg.sources.length > 0 && (
+  <div className="chatbot-sources">
+    <h4>📚 Sources:</h4>
+    <div className="chatbot-sources-list">
+      {msg.sources.map((source, i) => {
+        // Extract file name from full path
+        const fileName = source.source ? source.source.split(/[\\/]/).pop() : 'Unknown';
+        
+        return (
+          <div key={i} className="chatbot-source-item">
+            {/* Clickable link banayein */}
+            {source.file_path ? (
+              <a 
+                href={source.file_path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chatbot-source-link"
+                title={source.file_path}
+              >
+                <div className="chatbot-source-file">
+                  {fileName}
+                </div>
+              </a>
+            ) : (
+              <div className="chatbot-source-file">
+                {fileName}
+              </div>
+            )}
+            <div className="chatbot-source-score">
+              Relevance: {source.page ? source.page.toFixed(2) : '0.00'}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+)}
                       </div>
                     )}
                   </div>
@@ -405,11 +296,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
-
-
-
-
-
-
-

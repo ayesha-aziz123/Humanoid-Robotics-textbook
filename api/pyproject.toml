@@ -15,7 +15,6 @@ dependencies = [
     "fastembed (>=0.2.7,<0.3.0)",
     "langchain-google-genai>=1.0.5",
     "langchain>=0.2.1",
-    "langchain-community>=0.2.1",
     "langchain-qdrant>=0.1.1",
     "unstructured[md]>=0.14.5",
     "qdrant-client (>=1.16.1,<2.0.0)"

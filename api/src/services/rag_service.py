@@ -54,7 +54,7 @@ async def initialize_services():
         print("--- [DEBUG] Qdrant client initialized and connected.")
 
         print("--- [DEBUG] Initializing LLM...")
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GEMINI_API_KEY)
         initialization_status["llm"] = "Successfully initialized."
         print("--- [DEBUG] LLM initialized.")
         

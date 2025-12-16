@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report:
-- Version change: 2.0.0 -> 2.0.0
+- Version change: 2.0.0 -> 2.1.0
 - List of modified principles: None
-- Added sections: None
+- Added sections: ### Agent Validator (Question Relevance Check)
 - Removed sections: None
 - Templates requiring updates:
     - .specify/templates/plan-template.md: ✅ updated
@@ -13,14 +13,14 @@ Sync Impact Report:
 -->
 ---
 title: Project Constitution — Physical AI & Humanoid Robotics Textbook
-version: 2.0.0
+version: 2.1.0
 
 created_by: Ayesha
 created_at: 2025-11-28
 ---
 
 # Project Constitution
-**Purpose:** Is project ka maqsad ek high-quality, modular, classroom-ready textbook banana hai — "Physical AI & Humanoid Robotics" — jise hackathon submission ke liye Spec-Kit Plus, Docusaurus aur Claude subagents ke sath integrate kiya jayega.
+**Purpose:** This project is high-quality, modular, classroom-ready textbook banana hai — "Physical AI & Humanoid Robotics" — jise hackathon submission ke liye Spec-Kit Plus, Docusaurus aur Claude subagents ke sath integrate kiya jayega.
 
 ## 1. Scope & Deliverables
 - Primary deliverable: Publicly hosted Docusaurus textbook with **4 complete modules** (as per hackathon course outline) + embedded RAG chatbot with "selected-text only" answering.
@@ -128,6 +128,37 @@ created_at: 2025-11-28
    - Embed into Docusaurus book
 
 
+### Agent Validator (Question Relevance Check)
+
+**Purpose**: Ensure chatbot only answers questions related to the Physical AI & Humanoid Robotics textbook content.
+
+**Implementation Strategy**: Option A - Validate BEFORE RAG retrieval
+```
+User Question → Agent Validation → [If relevant] → RAG Process → Answer
+  → [If irrelevant] → Polite Rejection Message
+```
+
+**Technology Stack**:
+- **Framework**: OpenAI Agents SDK (using Gemini as backend via AsyncOpenAI)
+- **Model**: Gemini 2.0 Flash (via OpenAI-compatible endpoint)
+- **Integration Point**: FastAPI `/query` endpoint - validation happens first
+
+**Agent Configuration**:
+- Agent Name: "Question Validator"
+- Agent Role: Determine if user question is related to textbook topics
+- Response Types:
+  - RELEVANT: Question is about Physical AI, ROS 2, Gazebo, Isaac Sim, humanoid robotics, sensors, URDF, SLAM, or related robotics topics
+  - IRRELEVANT: Question is unrelated to textbook content (e.g., cooking, history, general knowledge)
+
+**Rejection Message (when irrelevant):**
+"I can only answer questions related to the Physical AI & Humanoid Robotics textbook. Please ask questions about topics covered in the book such as ROS 2, Gazebo, Isaac Sim, sensors, or humanoid robotics."
+
+**Quality Checks**:
+- Agent must respond within 2 seconds
+- False rejection rate < 5% (don't reject valid questions)
+- Log all validation decisions for monitoring
+
+
 ## File Structure
 - `/book_source/` - Docusaurus book
 - `/api/` - FastAPI backend
@@ -159,6 +190,13 @@ created_at: 2025-11-28
 - QDRANT_API_KEY=
 - CLUSTER_ID=
 - GEMINI_API_KEY=
+
+
+
+
+
+
+
 
 
 
