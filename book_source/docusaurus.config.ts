@@ -143,9 +143,9 @@ const config: Config = {
   tagline: 'Bridging digital AI with physical humanoid robots',
   
   // Set the production url of your site here
-  url: 'https://ayesha-aziz123.github.io',
+  url: 'https://humanoid-robotics-book-seven.vercel.app/',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/Humanoid-Robotics-textbook/',  // ✅ IMPORTANT: Add your repo name
+  baseUrl: '/',  // ✅ IMPORTANT: Add your repo name
   trailingSlash: false,
 
   projectName: 'Humanoid-Robotics-textbook',
