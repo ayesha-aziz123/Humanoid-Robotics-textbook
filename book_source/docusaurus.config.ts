@@ -133,7 +133,6 @@
 
 
 
-
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -145,11 +144,24 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://ayesha-aziz123.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
+<<<<<<< HEAD
   baseUrl: '/Humanoid-Robotics-textbook/',  // ✅ IMPORTANT: Add your repo name
   trailingSlash: false,
 
   projectName: 'Humanoid-Robotics-textbook',
   organizationName: 'ayesha-aziz123',
+=======
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/Humanoid-Robotics-textbook/',
+ trailingSlash: false,
+
+  projectName: 'Humanoid-Robotics-textbook', // Repository ka naam
+  organizationName: 'ayesha-aziz123', // Aapka GitHub username
+
+  // onBrokenLinks: 'warn',
+  // onBrokenMarkdownLinks: 'warn',
+
+>>>>>>> 14cae73 (Updated Translation Files)
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
