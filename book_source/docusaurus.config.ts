@@ -133,7 +133,6 @@
 
 
 
-
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -145,11 +144,16 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://ayesha-aziz123.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/humanoid-robotics-textbook/',  // ✅ IMPORTANT: Add your repo name
-  trailingSlash: false,
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/Humanoid-Robotics-textbook/',
+ trailingSlash: false,
 
-  projectName: 'humanoid-robotics-textbook',
-  organizationName: 'ayesha-aziz123',
+  projectName: 'Humanoid-Robotics-textbook', // Repository ka naam
+  organizationName: 'ayesha-aziz123', // Aapka GitHub username
+
+  // onBrokenLinks: 'warn',
+  // onBrokenMarkdownLinks: 'warn',
+
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -166,8 +170,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: 'docs',  
-          editUrl: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook/tree/main/',
+          // routeBasePath: 'docs',  
+          editUrl: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook/tree/main/',
         },
         blog: false,  // ✅ Disabled blog
         theme: {
@@ -196,7 +200,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook',
+          href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',
           label: 'GitHub',
           position: 'right',
         },
@@ -210,7 +214,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Issues',
-              href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook/issues',
+              href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook/issues',
             },
           ],
         },
@@ -219,7 +223,7 @@ const config: Config = {
           items: [
             {
               label: 'Project GitHub',
-              href: 'https://github.com/ayesha-aziz123/humanoid-robotics-textbook',
+              href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',
             },
           ],
         },
