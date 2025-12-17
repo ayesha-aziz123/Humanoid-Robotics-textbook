@@ -143,7 +143,7 @@ const config: Config = {
   tagline: 'Bridging digital AI with physical humanoid robots',
   
   // Set the production url of your site here
-  url: 'https://humanoid-robotics-book-seven.vercel.app/',
+  url: 'https://physical-ai-humanoid-robotics-textb-ten-beta.vercel.app/',
   // Set the /<baseUrl>/ pathname under which your site is served
   baseUrl: '/',  // ✅ IMPORTANT: Add your repo name
   trailingSlash: false,
