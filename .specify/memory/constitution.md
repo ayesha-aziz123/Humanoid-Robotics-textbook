@@ -1,22 +1,24 @@
 <!--
 Sync Impact Report:
-- Version change: 2.0.0 -> 2.1.0
-- List of modified principles: None
-- Added sections: ### Agent Validator (Question Relevance Check)
+- Version change: 2.1.0 -> 2.2.0
+- List of modified principles: None (added new section)
+- Added sections: ## 14. Authentication System Requirements
 - Removed sections: None
 - Templates requiring updates:
-    - .specify/templates/plan-template.md: ✅ updated
-    - .specify/templates/spec-template.md: ✅ updated
-    - .specify/templates/tasks-template.md: ✅ updated
-    - .specify/templates/commands/*.md: ✅ updated
+    - .specify/templates/plan-template.md: ⚠ pending
+    - .specify/templates/spec-template.md: ⚠ pending
+    - .specify/templates/tasks-template.md: ⚠ pending
+    - .specify/templates/commands/*.md: ⚠ pending
 - Follow-up TODOs if any placeholders intentionally deferred: None
 -->
 ---
 title: Project Constitution — Physical AI & Humanoid Robotics Textbook
-version: 2.1.0
+version: 2.2.0
 
 created_by: Ayesha
 created_at: 2025-11-28
+updated_by: Claude
+updated_at: 2025-12-17
 ---
 
 # Project Constitution
@@ -103,7 +105,8 @@ created_at: 2025-11-28
 3. FastAPI (or equivalent) RAG endpoint responding to queries.
 4. Proof (screen recording or images) of "selected-text only" answer flow.
 5. Professional UI replacing default Docusaurus theme.
-6. Submission package: GitHub link + hosted link + demo video.
+6. User authentication system protecting book content (login required for /docs pages).
+7. Submission package: GitHub link + hosted link + demo video.
 
 
 ## 13. Workflow & Writing Rules
@@ -111,6 +114,112 @@ created_at: 2025-11-28
 - Peer review via PR in `dev` branch; merge to `main` only after review.
 - Use consistent frontmatter for metadata.
 
+
+
+## 14. Authentication System Requirements
+- **Authentication Library**: Better Auth (https://www.better-auth.com/)
+- **Database**: SQLite (local file, NOT infrastructure DB)
+- **Session**: JWT tokens + HTTP-only cookies
+- **Backend**: FastAPI (existing backend to be extended)
+- **Frontend**: Docusaurus React components
+
+### User Data (Simple)
+- Name (required)
+- Email (required, unique)
+- Password (required, hashed)
+- NO additional fields needed
+
+### Protected vs Public Content
+**Protected** (Login required):
+- All `/docs/*` pages (book content)
+
+**Public** (No login required):
+- Home page
+- Login page (`/login`)
+- Signup page (`/signup`)
+- Chatbot (do NOT modify existing chatbot)
+- Urdu translation feature (keep public)
+
+### Authentication Flow
+1. User clicks "Book" in navbar
+2. Frontend checks auth status (JWT presence)
+3. If not authenticated → redirect to `/login`
+4. User fills login/signup form (name, email, password)
+5. Form submits to FastAPI auth routes
+6. Better Auth:
+   - Creates/authenticates user
+   - Stores in SQLite (`auth.db` file)
+   - Issues JWT session token
+   - Sets HTTP-only cookie
+7. Authenticated user can view `/docs` content
+8. Logout: session invalidated, redirect to home
+
+### Backend API Endpoints Needed
+- `POST /api/auth/signup` - Create new user
+- `POST /api/auth/login` - Authenticate user
+- `POST /api/auth/logout` - Invalidate session
+- `GET /api/auth/me` - Get current user
+- `GET /api/auth/verify` - Verify JWT token
+
+### Security Requirements
+- Passwords hashed (bcrypt/argon2)
+- JWT expiry: 7 days
+- HTTP-only cookies (not accessible via JS)
+- CSRF protection enabled
+- Secure flag in production
+
+### Environment Variables
+```env
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=31KgOiNyphbh5VJ5HmqZtd8xIh29psIx
+DATABASE_URL=sqlite:///./auth.db
+```
+
+### File Structure
+```
+api/                          # FastAPI backend
+├── auth/
+│   ├── routes.py            # Auth endpoints
+│   ├── models.py            # User model
+│   ├── config.py            # Better Auth config
+│   └── middleware.py        # JWT verification
+├── main.py
+├── auth.db                  # SQLite file
+└── requirements.txt
+
+book_source/
+├── src/
+│   ├── components/
+│   │   └── ProtectedRoute.tsx   # Route protection
+│   ├── context/
+│   │   └── AuthContext.tsx      # Auth state
+│   ├── pages/
+│   │   ├── login.tsx            # Login page
+│   │   └── signup.tsx           # Signup page
+│   └── utils/
+│       └── auth.ts              # Auth helpers
+└── docs/                    # Protected content
+```
+
+## What NOT to Include
+❌ Social login (Google, GitHub)
+❌ Magic links / passwordless
+❌ Email verification
+❌ Password reset
+❌ User profile editing
+❌ Role-based access control
+❌ Multi-factor authentication
+❌ User background questions (save for future personalization feature)
+❌ DO NOT modify existing chatbot
+❌ OAuth providers
+
+## Success Criteria
+✅ Users can signup with name, email, password
+✅ Users can login with credentials
+✅ Only authenticated users access `/docs`
+✅ Users can logout
+✅ Sessions persist across reloads
+✅ Chatbot remains public
 
 
 ## RAG Chatbot Implementation

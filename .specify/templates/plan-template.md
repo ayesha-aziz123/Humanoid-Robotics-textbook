@@ -31,7 +31,48 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### Authentication System Requirements
+- **Authentication Library**: Better Auth (https://www.better-auth.com/)
+- **Database**: SQLite (local file, NOT infrastructure DB)
+- **Session**: JWT tokens + HTTP-only cookies
+- **Backend**: FastAPI (existing backend to be extended)
+- **Frontend**: Docusaurus React components
+
+### User Data (Simple)
+- Name (required)
+- Email (required, unique)
+- Password (required, hashed)
+- NO additional fields needed
+
+### Protected vs Public Content
+**Protected** (Login required):
+- All `/docs/*` pages (book content)
+
+**Public** (No login required):
+- Home page
+- Login page (`/login`)
+- Signup page (`/signup`)
+- Chatbot (do NOT modify existing chatbot)
+- Urdu translation feature (keep public)
+
+### Security Requirements
+- Passwords hashed (bcrypt/argon2)
+- JWT expiry: 7 days
+- HTTP-only cookies (not accessible via JS)
+- CSRF protection enabled
+- Secure flag in production
+
+### What NOT to Include
+❌ Social login (Google, GitHub)
+❌ Magic links / passwordless
+❌ Email verification
+❌ Password reset
+❌ User profile editing
+❌ Role-based access control
+❌ Multi-factor authentication
+❌ User background questions (save for future personalization feature)
+❌ DO NOT modify existing chatbot
+❌ OAuth providers
 
 ## Project Structure
 

@@ -133,6 +133,7 @@
 
 
 
+
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -140,30 +141,17 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Physical AI & Robotics',
   tagline: 'Bridging digital AI with physical humanoid robots',
-  
+
   // Set the production url of your site here
-  url: 'https://ayesha-aziz123.github.io',
+  url: 'https://physical-ai-humanoid-robotics-textb-ten-beta.vercel.app/',
   // Set the /<baseUrl>/ pathname under which your site is served
-<<<<<<< HEAD
-  baseUrl: '/Humanoid-Robotics-textbook/',  // ✅ IMPORTANT: Add your repo name
+  baseUrl: '/',  // ✅ IMPORTANT: Add your repo name
   trailingSlash: false,
 
   projectName: 'Humanoid-Robotics-textbook',
   organizationName: 'ayesha-aziz123',
-=======
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/Humanoid-Robotics-textbook/',
- trailingSlash: false,
 
-  projectName: 'Humanoid-Robotics-textbook', // Repository ka naam
-  organizationName: 'ayesha-aziz123', // Aapka GitHub username
-
-  // onBrokenLinks: 'warn',
-  // onBrokenMarkdownLinks: 'warn',
-
->>>>>>> 14cae73 (Updated Translation Files)
-
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // ✅ FIXED: Proper i18n configuration
@@ -181,7 +169,7 @@ const config: Config = {
           // routeBasePath: 'docs',  
           editUrl: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook/tree/main/',
         },
-        blog: false,  // ✅ Disabled blog
+        blog: false, 
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -206,6 +194,16 @@ const config: Config = {
         {
           type: 'localeDropdown',
           position: 'right',
+        },
+        {
+          label: 'Signup',
+          position: 'right',
+          href:'/signup'
+        },
+        {
+          label: 'Login',
+          position: 'right',
+          href:'/login'
         },
         {
           href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',

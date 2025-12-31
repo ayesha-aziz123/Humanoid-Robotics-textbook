@@ -63,11 +63,13 @@ description: "Task list template for feature implementation"
 Examples of foundational tasks (adjust based on your project):
 
 - [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T005 [P] Implement Better Auth authentication framework with SQLite database
+- [ ] T006 [P] Setup API routing and middleware structure for authentication
+- [ ] T007 Create user model with name, email, password fields (required for auth)
+- [ ] T008 Configure JWT token generation and HTTP-only cookie management
+- [ ] T009 Setup environment configuration for auth (BETTER_AUTH_SECRET, etc.)
+- [ ] T010 Implement auth middleware to protect `/docs/*` routes
+- [ ] T011 Create public routes for home, login, signup, chatbot (no auth required)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
