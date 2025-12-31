@@ -4,9 +4,17 @@ __pycache__/
 .venv/
 venv/
 dist/
+build/
 *.egg-info/
 *.log
 .env*
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Database
+auth.db
+*.db
 
 # Universal
 .DS_Store
@@ -20,6 +28,11 @@ Thumbs.db
 node_modules/
 dist/
 build/
+*.min.js
+*.min.css
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Project specific additions
 .git/

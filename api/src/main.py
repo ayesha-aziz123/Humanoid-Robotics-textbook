@@ -147,9 +147,18 @@ import httpx
 from dotenv import load_dotenv
 from fastembed import TextEmbedding
 import google.generativeai as genai
-# Import the agent validator
 from src.services.agent_validator import validate_question, ValidationStatus, format_rejection_response, format_success_response
 
+# Import auth routes
+import sys
+import os
+# Add the parent directory (project root) to Python path to allow absolute imports
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+# from auth.routers import router as auth_router
+# from api.auth.routers.auth_router import routes as auth_router
+from auth.routers.auth_router import router as auth_router
 
 # --- FastAPI App Setup ---
 app = FastAPI()
@@ -158,12 +167,16 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
+        'http://localhost:8000',
         "http://127.0.0.1:3000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include auth routes
+app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 
 # --- Pydantic Models ---
 class QueryRequest(BaseModel):

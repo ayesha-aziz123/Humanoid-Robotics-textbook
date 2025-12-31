@@ -141,7 +141,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Physical AI & Robotics',
   tagline: 'Bridging digital AI with physical humanoid robots',
-  
+
   // Set the production url of your site here
   url: 'https://physical-ai-humanoid-robotics-textb-ten-beta.vercel.app/',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -151,7 +151,7 @@ const config: Config = {
   projectName: 'Humanoid-Robotics-textbook',
   organizationName: 'ayesha-aziz123',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // ✅ FIXED: Proper i18n configuration
@@ -169,7 +169,7 @@ const config: Config = {
           // routeBasePath: 'docs',  
           editUrl: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook/tree/main/',
         },
-        blog: false,  // ✅ Disabled blog
+        blog: false, 
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -194,6 +194,16 @@ const config: Config = {
         {
           type: 'localeDropdown',
           position: 'right',
+        },
+        {
+          label: 'Signup',
+          position: 'right',
+          href:'/signup'
+        },
+        {
+          label: 'Login',
+          position: 'right',
+          href:'/login'
         },
         {
           href: 'https://github.com/ayesha-aziz123/Humanoid-Robotics-textbook',

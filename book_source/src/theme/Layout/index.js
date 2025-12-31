@@ -1,12 +1,29 @@
+// // src/theme/Root.js
+// import { AuthProvider } from '@site/src/context/AuthContext'
+// import Chatbot from '@site/src/components/Chatbot';
+
+// export default function Root({ children }) {
+//   return (
+//     <AuthProvider>
+//       {children}
+//       <Chatbot />  
+//     </AuthProvider>
+//   );
+// }
+
+
+
+// // // src/theme/Layout/index.js
 import React from 'react';
-import Layout from '@theme-original/Layout';
+import OriginalLayout from '@theme-original/Layout';
+import { AuthProvider } from '@site/src/context/AuthContext';
 import Chatbot from '@site/src/components/Chatbot';
 
-export default function LayoutWrapper(props) {
+export default function Layout(props) {
   return (
-    <>
-      <Layout {...props} />
+    <AuthProvider>
+      <OriginalLayout {...props} />
       <Chatbot />
-    </>
+    </AuthProvider>
   );
 }
